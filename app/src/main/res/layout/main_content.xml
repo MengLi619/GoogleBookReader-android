@@ -11,12 +11,18 @@
         <import type="com.xiaoheifamily.bookstore.binding.recyclerview.LayoutManagers" />
     </data>
 
-    <android.support.v7.widget.RecyclerView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:itemBindVariable="@{1}"
-        app:itemLayout="@{@layout/book_item}"
-        app:items="@{model.books}"
-        app:layoutManager="@{LayoutManagers.linear()}" />
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:itemBinder="@{model.itemBinder}"
+            app:items="@{model.books}"
+            app:layoutManager="@{LayoutManagers.linear()}" />
+
+    </LinearLayout>
 
 </layout>

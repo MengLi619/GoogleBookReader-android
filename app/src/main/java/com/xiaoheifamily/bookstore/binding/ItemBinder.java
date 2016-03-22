@@ -8,9 +8,9 @@ public class ItemBinder {
     private final int layout;
     private final int bindingVariable;
 
-    public ItemBinder(int bindingVariable, @LayoutRes int layout) {
-        this.bindingVariable = bindingVariable;
+    public ItemBinder(@LayoutRes int layout, int bindingVariable) {
         this.layout = layout;
+        this.bindingVariable = bindingVariable;
     }
 
     public int getLayout() {

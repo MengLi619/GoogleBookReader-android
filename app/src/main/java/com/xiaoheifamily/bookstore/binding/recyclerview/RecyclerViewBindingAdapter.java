@@ -17,9 +17,8 @@ public class RecyclerViewBindingAdapter {
                                       ItemBinder itemBinder,
                                       LayoutManagers.LayoutManagerFactory layoutManagerFactory) {
 
-        recyclerView.setAdapter(new ObservableRecyclerViewAdapter<>(items,
-                itemBinder.getLayout(), itemBinder.getBindingVariable()));
-
         recyclerView.setLayoutManager(layoutManagerFactory.create(recyclerView));
+        recyclerView.setAdapter(new ObservableRecyclerViewAdapter<>(items, itemBinder.getLayout(),
+                itemBinder.getBindingVariable()));
     }
 }

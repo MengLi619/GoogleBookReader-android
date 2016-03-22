@@ -2,6 +2,7 @@ package com.xiaoheifamily.bookstore.service;
 
 import com.xiaoheifamily.bookstore.model.Book;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,10 +10,13 @@ public class BookService {
 
     public List<Book> getBooks() {
 
-        return Arrays.asList(
-                createBook(1, "book1"),
-                createBook(2, "book2")
-        );
+        List<Book> books = new ArrayList<>();
+
+        for (int i = 0; i < 100; i++) {
+            books.add(createBook(i, "book" + i));
+        }
+
+        return books;
     }
 
     private Book createBook(int id, String name) {

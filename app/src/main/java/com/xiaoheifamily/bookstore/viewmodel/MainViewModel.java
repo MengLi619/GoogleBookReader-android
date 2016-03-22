@@ -4,6 +4,9 @@ import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 
+import com.xiaoheifamily.bookstore.BR;
+import com.xiaoheifamily.bookstore.R;
+import com.xiaoheifamily.bookstore.binding.ItemBinder;
 import com.xiaoheifamily.bookstore.model.Book;
 import com.xiaoheifamily.bookstore.service.BookService;
 
@@ -13,6 +16,7 @@ public class MainViewModel extends ViewModelBase {
 
     private final BookService bookService;
     private final ObservableList<Book> books = new ObservableArrayList<>();
+    public final ItemBinder itemBinder = new ItemBinder(R.layout.book_item, BR.book);
 
     @Inject
     public MainViewModel(BookService bookService) {
