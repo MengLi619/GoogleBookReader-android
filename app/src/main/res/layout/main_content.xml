@@ -26,8 +26,8 @@
             app:itemBinder="@{model.itemBinder}"
             app:items="@{model.books}"
             app:layoutManager="@{LayoutManagers.linear()}"
-            app:onRefresh="@{model.onRefresh}"
-            app.onLoadMore="@{model.onLoadMore}"/>
+            app:onLoadMore="@{model.onLoadMore}"
+            app:onRefresh="@{model.onRefresh}" />
 
     </LinearLayout>
 

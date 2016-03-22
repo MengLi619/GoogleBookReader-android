@@ -4,6 +4,7 @@ import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.xiaoheifamily.bookstore.BR;
 import com.xiaoheifamily.bookstore.R;
 import com.xiaoheifamily.bookstore.binding.recyclerview.ItemBinder;
@@ -29,11 +30,14 @@ public class MainViewModel extends ViewModelBase {
         return books;
     }
 
-    public void onRefresh() {
+    public void onRefresh(XRecyclerView recyclerView) {
         books.clear();
         books.addAll(bookService.getBooks());
+        recyclerView.refreshComplete();
     }
 
-    public void onLoadMore() {
+    public void onLoadMore(XRecyclerView recyclerView) {
+        books.addAll(bookService.getBooks());
+        recyclerView.loadMoreComplete();
     }
 }

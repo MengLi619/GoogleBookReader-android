@@ -1,7 +1,6 @@
 package com.xiaoheifamily.bookstore.adapter;
 
 import android.databinding.DataBindingUtil;
-import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
@@ -10,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 public class ObservableRecyclerViewAdapter<T> extends RecyclerView.Adapter<ObservableRecyclerViewAdapter.ViewHolder> {
 
@@ -81,18 +79,12 @@ public class ObservableRecyclerViewAdapter<T> extends RecyclerView.Adapter<Obser
     private final int itemLayout;
     private final int itemBindVariable;
 
-    public ObservableRecyclerViewAdapter(@NonNull List<T> items, int itemLayout, int itemBindVariable) {
+    public ObservableRecyclerViewAdapter(@NonNull ObservableList<T> items, int itemLayout, int itemBindVariable) {
 
-        if (items instanceof ObservableList) {
-            this.items = (ObservableList<T>) items;
-        } else {
-            this.items = new ObservableArrayList<>();
-            this.items.addAll(items);
-        }
-
-        this.items.addOnListChangedCallback(new WeakReferenceOnListChangedCallback<>(this));
+        this.items = items;
         this.itemLayout = itemLayout;
         this.itemBindVariable = itemBindVariable;
+        this.items.addOnListChangedCallback(new WeakReferenceOnListChangedCallback<>(this));
     }
 
     @SuppressWarnings("unused")

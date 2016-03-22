@@ -6,12 +6,19 @@ import android.support.v7.widget.RecyclerView;
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.xiaoheifamily.bookstore.adapter.ObservableRecyclerViewAdapter;
-import com.xiaoheifamily.bookstore.functional.Action;
 
 @SuppressWarnings("unused")
 public class RecyclerViewBindingAdapters {
 
-    @BindingAdapter(value = "layoutManager")
+    public interface OnRecyclerViewRefresh {
+        void onRefresh(XRecyclerView recyclerView);
+    }
+
+    public interface OnRecyclerViewLoadMore {
+        void onLoadMore(XRecyclerView recyclerView);
+    }
+
+    @BindingAdapter("layoutManager")
     public static void setLayoutManager(RecyclerView recyclerView,
                                         LayoutManagers.LayoutManagerFactory layoutManagerFactory) {
 
@@ -19,25 +26,29 @@ public class RecyclerViewBindingAdapters {
     }
 
     @SuppressWarnings("unchecked")
-    @BindingAdapter(value = {"items", "itemBinder"})
+    @BindingAdapter({"items", "itemBinder"})
     public static <T> void setAdapter(RecyclerView recyclerView, ObservableList<T> items, ItemBinder itemBinder) {
 
-        recyclerView.setAdapter(new ObservableRecyclerViewAdapter<>(items, itemBinder.getLayout(),
-                itemBinder.getBindingVariable()));
+        // Only set adapter at first time.
+        if (recyclerView.getAdapter() == null) {
+
+            recyclerView.setAdapter(new ObservableRecyclerViewAdapter<>(items, itemBinder.getLayout(),
+                    itemBinder.getBindingVariable()));
+        }
     }
 
-    @BindingAdapter(value = {"onRefresh", "onLoadMore"})
-    public static void setEvents(XRecyclerView recyclerView, Action onRefresh, Action onLoadMore) {
+    @BindingAdapter({"onRefresh", "onLoadMore"})
+    public static void setEvents(XRecyclerView recyclerView, OnRecyclerViewRefresh onRefresh, OnRecyclerViewLoadMore onLoadMore) {
 
         recyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                onRefresh.invoke();
+                onRefresh.onRefresh(recyclerView);
             }
 
             @Override
             public void onLoadMore() {
-                onLoadMore.invoke();
+                onLoadMore.onLoadMore(recyclerView);
             }
         });
     }
