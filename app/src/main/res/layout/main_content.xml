@@ -25,7 +25,9 @@
             android:layout_height="match_parent"
             app:itemBinder="@{model.itemBinder}"
             app:items="@{model.books}"
-            app:layoutManager="@{LayoutManagers.linear()}" />
+            app:layoutManager="@{LayoutManagers.linear()}"
+            app:onRefresh="@{model.refresh}"
+            app.onLoadMore="@{model.loadMore}"/>
 
     </LinearLayout>
 

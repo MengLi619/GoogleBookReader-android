@@ -3,6 +3,7 @@ package com.xiaoheifamily.bookstore.viewmodel;
 import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
+import android.view.View;
 
 import com.xiaoheifamily.bookstore.BR;
 import com.xiaoheifamily.bookstore.R;
@@ -29,8 +30,12 @@ public class MainViewModel extends ViewModelBase {
         return books;
     }
 
-    public void refresh() {
+    public void refresh(View view) {
         books.clear();
         books.addAll(bookService.getBooks());
+    }
+
+    public void loadMore(View view) {
+
     }
 }
