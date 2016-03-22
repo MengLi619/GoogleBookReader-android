@@ -3,7 +3,7 @@ package com.xiaoheifamily.bookstore.model;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
-import com.android.databinding.library.baseAdapters.BR;
+import com.xiaoheifamily.bookstore.BR;
 
 public class Book extends BaseObservable {
 

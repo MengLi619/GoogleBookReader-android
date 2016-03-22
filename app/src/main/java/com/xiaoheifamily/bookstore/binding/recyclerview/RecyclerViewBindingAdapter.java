@@ -1,4 +1,4 @@
-package com.xiaoheifamily.bookstore.recyclerview;
+package com.xiaoheifamily.bookstore.binding.recyclerview;
 
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableList;

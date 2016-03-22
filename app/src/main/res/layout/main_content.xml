@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.xiaoheifamily.bookstore.viewmodel.MainViewModel" />
+
+        <import type="com.xiaoheifamily.bookstore.binding.recyclerview.LayoutManagers" />
+    </data>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:itemBindVariable="@{1}"
+        app:itemLayout="@{@layout/book_item}"
+        app:items="@{model.books}"
+        app:layoutManager="@{LayoutManagers.linear()}" />
+
+</layout>
