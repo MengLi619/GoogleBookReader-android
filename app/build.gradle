@@ -36,6 +36,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.google.dagger:dagger:2.0.2'
+    compile 'com.jcodecraeer:xrecyclerview:1.2.6'
     apt 'com.google.dagger:dagger-compiler:2.0.2'
     provided 'org.glassfish:javax.annotation:10.0-b28'
 }
