@@ -2,23 +2,24 @@ package com.xiaoheifamily.bookstore.binding.recyclerview;
 
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableList;
-import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 
 import com.xiaoheifamily.bookstore.adapter.ObservableRecyclerViewAdapter;
+import com.xiaoheifamily.bookstore.binding.ItemBinder;
 
 @SuppressWarnings("unused")
 public class RecyclerViewBindingAdapter {
 
     @SuppressWarnings("unchecked")
-    @BindingAdapter(value = {"items", "itemLayout", "itemBindVariable", "layoutManager"}, requireAll = false)
+    @BindingAdapter(value = {"items", "itemBinder", "layoutManager"})
     public static <T> void setAdapter(RecyclerView recyclerView,
                                       ObservableList<T> items,
-                                      @LayoutRes int itemLayout,
-                                      int itemBindVariable,
+                                      ItemBinder itemBinder,
                                       LayoutManagers.LayoutManagerFactory layoutManagerFactory) {
 
-        recyclerView.setAdapter(new ObservableRecyclerViewAdapter<>(items, itemLayout, itemBindVariable));
+        recyclerView.setAdapter(new ObservableRecyclerViewAdapter<>(items,
+                itemBinder.getLayout(), itemBinder.getBindingVariable()));
+
         recyclerView.setLayoutManager(layoutManagerFactory.create(recyclerView));
     }
 }
