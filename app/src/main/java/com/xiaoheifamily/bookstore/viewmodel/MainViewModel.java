@@ -3,11 +3,10 @@ package com.xiaoheifamily.bookstore.viewmodel;
 import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
-import android.view.View;
 
 import com.xiaoheifamily.bookstore.BR;
 import com.xiaoheifamily.bookstore.R;
-import com.xiaoheifamily.bookstore.binding.ItemBinder;
+import com.xiaoheifamily.bookstore.binding.recyclerview.ItemBinder;
 import com.xiaoheifamily.bookstore.model.Book;
 import com.xiaoheifamily.bookstore.service.BookService;
 
@@ -30,12 +29,11 @@ public class MainViewModel extends ViewModelBase {
         return books;
     }
 
-    public void refresh(View view) {
+    public void onRefresh() {
         books.clear();
         books.addAll(bookService.getBooks());
     }
 
-    public void loadMore(View view) {
-
+    public void onLoadMore() {
     }
 }

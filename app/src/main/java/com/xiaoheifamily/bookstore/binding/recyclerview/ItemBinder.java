@@ -1,4 +1,4 @@
-package com.xiaoheifamily.bookstore.binding;
+package com.xiaoheifamily.bookstore.binding.recyclerview;
 
 import android.support.annotation.LayoutRes;
 
