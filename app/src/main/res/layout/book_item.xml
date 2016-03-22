@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="book"
             type="com.xiaoheifamily.bookstore.model.Book" />
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -31,14 +31,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/book_title_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{book.title}"
                     tools:text="Title" />
 
                 <TextView
-                    android:id="@+id/book_authors_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{book.description}"
