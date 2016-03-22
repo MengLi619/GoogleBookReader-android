@@ -1,11 +1,13 @@
 package com.xiaoheifamily.bookstore.activity;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.xiaoheifamily.bookstore.R;
+import com.xiaoheifamily.bookstore.databinding.MainActivityBinding;
 import com.xiaoheifamily.bookstore.viewmodel.MainViewModel;
 
 public class MainActivity extends ActivityBase<MainViewModel> {
@@ -14,7 +16,9 @@ public class MainActivity extends ActivityBase<MainViewModel> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main_activity);
+        MainActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.main_activity);
+        binding.setModel(getViewModelComponent().getMainViewModel());
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
