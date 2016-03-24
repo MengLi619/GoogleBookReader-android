@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.xiaoheifamily.bookstore.activity.MainActivity.MainActivity"
+    tools:context="com.xiaoheifamily.bookstore.activity.MainActivity"
     tools:showIn="@layout/main_activity">
 
     <data>
@@ -15,20 +15,18 @@
         <import type="com.xiaoheifamily.bookstore.binding.recyclerview.LayoutManagers" />
     </data>
 
-    <LinearLayout
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        app:onRefresh="@{model.onRefresh}">
 
-        <com.jcodecraeer.xrecyclerview.XRecyclerView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:itemBinder="@{model.itemBinder}"
             app:items="@{model.books}"
-            app:layoutManager="@{LayoutManagers.linear()}"
-            app:onLoadMore="@{model.onLoadMore}"
-            app:onRefresh="@{model.onRefresh}" />
+            app:layoutManager="@{LayoutManagers.linear()}" />
 
-    </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </layout>

@@ -75,21 +75,35 @@ public class ObservableRecyclerViewAdapter<T> extends RecyclerView.Adapter<Obser
         }
     }
 
-    private final ObservableList<T> items;
+    private ObservableList<T> items;
     private final int itemLayout;
     private final int itemBindVariable;
+    private final WeakReferenceOnListChangedCallback<T> callback;
 
     public ObservableRecyclerViewAdapter(@NonNull ObservableList<T> items, int itemLayout, int itemBindVariable) {
 
         this.items = items;
         this.itemLayout = itemLayout;
         this.itemBindVariable = itemBindVariable;
-        this.items.addOnListChangedCallback(new WeakReferenceOnListChangedCallback<>(this));
+
+        this.callback = new WeakReferenceOnListChangedCallback<>(this);
+        this.items.addOnListChangedCallback(callback);
     }
 
     @SuppressWarnings("unused")
     public ObservableList<T> getItems() {
         return items;
+    }
+
+    public void setItems(ObservableList<T> items) {
+
+        if (this.items != items) {
+
+            this.items.removeOnListChangedCallback(callback);
+            this.items = items;
+            this.items.addOnListChangedCallback(callback);
+            notifyDataSetChanged();
+        }
     }
 
     @Override
