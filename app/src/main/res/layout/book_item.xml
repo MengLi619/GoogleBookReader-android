@@ -34,18 +34,19 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:padding="10dp"
-                android:orientation="vertical">
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
                     style="style/TextAppearance.Medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="1"
+                    android:maxLines="2"
                     android:text="@{book.title}"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     tools:text="Book Title" />
 
@@ -55,8 +56,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
-                    android:maxLines="1"
+                    android:maxLines="2"
                     android:text="@{book.description}"
+                    android:textSize="12sp"
                     tools:text="Book Description" />
 
             </LinearLayout>
