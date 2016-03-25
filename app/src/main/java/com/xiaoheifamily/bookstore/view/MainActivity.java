@@ -1,4 +1,4 @@
-package com.xiaoheifamily.bookstore.activity;
+package com.xiaoheifamily.bookstore.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
