@@ -10,61 +10,57 @@
             type="com.xiaoheifamily.bookstore.model.Book" />
     </data>
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="1dp">
+        android:background="?android:attr/activatedBackgroundIndicator"
+        android:orientation="horizontal"
+        android:divider="@color/divider"
+        android:dividerHeight="1dp">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            app:circle="@{true}"
+            app:imageUrl="@{book.image}"
+            tools:ignore="ContentDescription"
+            tools:src="@android:drawable/sym_def_app_icon" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:scaleType="centerCrop"
-                app:circle="@{true}"
-                app:imageUrl="@{book.image}"
-                tools:ignore="ContentDescription"
-                tools:src="@android:drawable/sym_def_app_icon" />
-
-            <LinearLayout
-                android:layout_width="0dp"
+            <TextView
+                style="style/TextAppearance.Medium"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{book.title}"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="Book Title" />
 
-                <TextView
-                    style="style/TextAppearance.Medium"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="@{book.title}"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    tools:text="Book Title" />
-
-                <TextView
-                    style="style/TextAppearance.Small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="@{book.description}"
-                    android:textSize="12sp"
-                    tools:text="Book Description" />
-
-            </LinearLayout>
+            <TextView
+                style="style/TextAppearance.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{book.description}"
+                android:textSize="12sp"
+                tools:text="Book Description" />
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 </layout>

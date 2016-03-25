@@ -52,18 +52,18 @@ public class MainViewModel extends ViewModelBase {
 
     public void refresh(SwipeRefreshLayout layout) {
 
-        currentIndex = 0;
-
-        bookWebApi.getBooks(currentIndex, PageSize)
+        bookWebApi.getBooks(0, PageSize)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnCompleted(() -> layout.setRefreshing(false))
                 .subscribe(x -> {
                     books.clear();
                     books.addAll(x);
+                    currentIndex = 0;
                 });
     }
 
+    @SuppressWarnings("UnusedParameters")
     public void loadMore(RecyclerView view, Action loadFinished) {
 
         bookWebApi.getBooks(currentIndex, PageSize)
@@ -71,7 +71,11 @@ public class MainViewModel extends ViewModelBase {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnCompleted(loadFinished::call)
                 .subscribe(x -> {
-                    books.addAll(ObservableListUtils.fromList(x));
+                    ObservableList<Book> books = ObservableListUtils.fromList(x);
+                    if (books.size() > 0) {
+                        currentIndex++;
+                    }
+                    this.books.addAll(books);
                 });
     }
 }

@@ -26,7 +26,7 @@
             app:itemBinder="@{model.itemBinder}"
             app:items="@{model.books}"
             app:layoutManager="@{LayoutManagers.linear()}"
-            app:loadMore="@{model.loadMore}"/>
+            app:loadMore="@{model.loadMore}" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
