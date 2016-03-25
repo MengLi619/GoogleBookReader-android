@@ -7,14 +7,14 @@
 
         <variable
             name="model"
-            type="com.xiaoheifamily.bookstore.viewmodel.MainViewModel" />
+            type="com.xiaoheifamily.bookstore.viewmodel.BookViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".view.activity.MainActivity">
+        tools:context=".view.activity.BookActivity">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
         </android.support.design.widget.AppBarLayout>
 
         <include
-            layout="@layout/main_content"
+            layout="@layout/book_content"
             app:model="@{model}" />
 
     </android.support.design.widget.CoordinatorLayout>

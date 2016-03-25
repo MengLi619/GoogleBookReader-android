@@ -2,4 +2,5 @@
     <string name="app_name">bookstore</string>
     <string name="action_settings">Settings</string>
     <string name="test">testestest</string>
+    <string name="title_activity_book_detail">BookDetailActivity</string>
 </resources>

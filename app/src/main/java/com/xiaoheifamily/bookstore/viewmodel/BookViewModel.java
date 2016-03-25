@@ -19,7 +19,7 @@ import javax.inject.Inject;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class MainViewModel extends ViewModelBase {
+public class BookViewModel extends ViewModelBase {
 
     private static final int PageSize = 10;
 
@@ -30,7 +30,7 @@ public class MainViewModel extends ViewModelBase {
     private int currentIndex;
 
     @Inject
-    public MainViewModel(BookWebApi bookWebApi) {
+    public BookViewModel(BookWebApi bookWebApi) {
 
         this.bookWebApi = bookWebApi;
 
