@@ -4,11 +4,14 @@ import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 
 import com.xiaoheifamily.bookstore.BR;
 import com.xiaoheifamily.bookstore.R;
 import com.xiaoheifamily.bookstore.binding.recyclerview.ItemBinder;
+import com.xiaoheifamily.bookstore.functional.Action;
 import com.xiaoheifamily.bookstore.model.Book;
+import com.xiaoheifamily.bookstore.utils.ObservableListUtils;
 import com.xiaoheifamily.bookstore.webapi.BookWebApi;
 
 import javax.inject.Inject;
@@ -47,7 +50,7 @@ public class MainViewModel extends ViewModelBase {
         return itemBinder;
     }
 
-    public void onRefresh(SwipeRefreshLayout layout) {
+    public void refresh(SwipeRefreshLayout layout) {
 
         currentIndex = 0;
 
@@ -61,14 +64,14 @@ public class MainViewModel extends ViewModelBase {
                 });
     }
 
-    public void onLoadMore(SwipeRefreshLayout layout) {
+    public void loadMore(RecyclerView view, Action loadFinished) {
 
         bookWebApi.getBooks(currentIndex, PageSize)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnCompleted(() -> layout.setRefreshing(false))
+                .doOnCompleted(loadFinished::call)
                 .subscribe(x -> {
-//                    setBooks(ObservableListUtils.fromList(x));
+                    books.addAll(ObservableListUtils.fromList(x));
                 });
     }
 }

@@ -18,14 +18,15 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:onRefresh="@{model.onRefresh}">
+        app:onRefresh="@{model.refresh}">
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:itemBinder="@{model.itemBinder}"
             app:items="@{model.books}"
-            app:layoutManager="@{LayoutManagers.linear()}" />
+            app:layoutManager="@{LayoutManagers.linear()}"
+            app:loadMore="@{model.loadMore}"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
