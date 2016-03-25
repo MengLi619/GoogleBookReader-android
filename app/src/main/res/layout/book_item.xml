@@ -15,8 +15,7 @@
         android:layout_height="wrap_content"
         android:background="?android:attr/activatedBackgroundIndicator"
         android:orientation="horizontal"
-        android:divider="@color/divider"
-        android:dividerHeight="1dp">
+        android:divider="@drawable/divider">
 
         <ImageView
             android:layout_width="60dp"
