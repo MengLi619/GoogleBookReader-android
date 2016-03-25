@@ -8,17 +8,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.xiaoheifamily.bookstore.R;
-import com.xiaoheifamily.bookstore.databinding.BookActivityBinding;
+import com.xiaoheifamily.bookstore.databinding.BookListActivityBinding;
 import com.xiaoheifamily.bookstore.view.recyclerview.DividerItemDecoration;
-import com.xiaoheifamily.bookstore.viewmodel.BookViewModel;
+import com.xiaoheifamily.bookstore.viewmodel.BookListViewModel;
 
-public class BookActivity extends ActivityBase<BookViewModel> {
+public class BookListActivity extends ActivityBase<BookListViewModel> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        BookActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.book_activity);
+        BookListActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.book_list_activity);
         binding.setModel(getViewModelComponent().getBookViewModel());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

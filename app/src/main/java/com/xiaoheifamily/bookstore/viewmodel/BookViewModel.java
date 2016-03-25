@@ -1,81 +1,16 @@
 package com.xiaoheifamily.bookstore.viewmodel;
 
-import android.databinding.Bindable;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-
-import com.xiaoheifamily.bookstore.BR;
-import com.xiaoheifamily.bookstore.R;
-import com.xiaoheifamily.bookstore.binding.recyclerview.ItemBinder;
-import com.xiaoheifamily.bookstore.functional.Action;
 import com.xiaoheifamily.bookstore.model.Book;
-import com.xiaoheifamily.bookstore.utils.ObservableListUtils;
-import com.xiaoheifamily.bookstore.webapi.BookWebApi;
-
-import javax.inject.Inject;
-
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class BookViewModel extends ViewModelBase {
 
-    private static final int PageSize = 10;
+    private final Book book;
 
-    private final BookWebApi bookWebApi;
-    private ObservableList<Book> books = new ObservableArrayList<>();
-    private final ItemBinder itemBinder = new ItemBinder(R.layout.book_item, BR.book);
-
-    private int currentIndex;
-
-    @Inject
-    public BookViewModel(BookWebApi bookWebApi) {
-
-        this.bookWebApi = bookWebApi;
-
-        bookWebApi.getBooks(currentIndex, PageSize)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(books::addAll);
+    public BookViewModel(Book book) {
+        this.book = book;
     }
 
-    @Bindable
-    public ObservableList<Book> getBooks() {
-        return books;
-    }
-
-    @Bindable
-    public ItemBinder getItemBinder() {
-        return itemBinder;
-    }
-
-    public void refresh(SwipeRefreshLayout layout) {
-
-        bookWebApi.getBooks(0, PageSize)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnCompleted(() -> layout.setRefreshing(false))
-                .subscribe(x -> {
-                    books.clear();
-                    books.addAll(x);
-                    currentIndex = 0;
-                });
-    }
-
-    @SuppressWarnings("UnusedParameters")
-    public void loadMore(RecyclerView view, Action loadFinished) {
-
-        bookWebApi.getBooks(currentIndex, PageSize)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnCompleted(loadFinished::call)
-                .subscribe(x -> {
-                    ObservableList<Book> books = ObservableListUtils.fromList(x);
-                    if (books.size() > 0) {
-                        currentIndex++;
-                    }
-                    this.books.addAll(books);
-                });
+    public Book getBook() {
+        return book;
     }
 }

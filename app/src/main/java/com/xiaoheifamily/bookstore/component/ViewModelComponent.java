@@ -3,7 +3,7 @@ package com.xiaoheifamily.bookstore.component;
 import com.xiaoheifamily.bookstore.module.ApplicationModule;
 import com.xiaoheifamily.bookstore.module.ServiceModule;
 import com.xiaoheifamily.bookstore.module.WebApiModule;
-import com.xiaoheifamily.bookstore.viewmodel.BookViewModel;
+import com.xiaoheifamily.bookstore.viewmodel.BookListViewModel;
 
 import javax.inject.Singleton;
 
@@ -13,5 +13,5 @@ import dagger.Component;
 @Singleton
 public interface ViewModelComponent {
 
-    BookViewModel getBookViewModel();
+    BookListViewModel getBookViewModel();
 }
