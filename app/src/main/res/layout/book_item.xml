@@ -6,14 +6,15 @@
     <data>
 
         <variable
-            name="book"
-            type="com.xiaoheifamily.bookstore.model.Book" />
+            name="model"
+            type="com.xiaoheifamily.bookstore.viewmodel.BookItemViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/activatedBackgroundIndicator"
+        android:onClick="@{model.click}"
         android:orientation="horizontal">
 
         <ImageView
@@ -23,7 +24,7 @@
             android:layout_margin="10dp"
             android:scaleType="centerCrop"
             app:circle="@{true}"
-            app:imageUrl="@{book.image}"
+            app:imageUrl="@{model.book.image}"
             tools:ignore="ContentDescription"
             tools:src="@android:drawable/sym_def_app_icon" />
 
@@ -41,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@{book.title}"
+                android:text="@{model.book.title}"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 tools:text="Book Title" />
@@ -53,7 +54,7 @@
                 android:layout_marginTop="10dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="@{book.description}"
+                android:text="@{model.book.description}"
                 android:textSize="12sp"
                 tools:text="Book Description" />
 

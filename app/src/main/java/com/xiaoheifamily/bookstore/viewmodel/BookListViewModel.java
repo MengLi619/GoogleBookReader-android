@@ -25,7 +25,7 @@ public class BookListViewModel extends ViewModelBase {
     private static final int PageSize = 10;
 
     private final BookWebApi bookWebApi;
-    private ObservableList<BookViewModel> books = new ObservableArrayList<>();
+    private ObservableList<BookItemViewModel> books = new ObservableArrayList<>();
     private final ItemBinder itemBinder = new ItemBinder(R.layout.book_item, BR.book);
 
     private int currentIndex;
@@ -39,12 +39,12 @@ public class BookListViewModel extends ViewModelBase {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(x -> {
-                    books.addAll(Mapper.mapList(x, BookViewModel::new));
+                    books.addAll(Mapper.mapList(x, BookItemViewModel::new));
                 });
     }
 
     @Bindable
-    public ObservableList<BookViewModel> getBooks() {
+    public ObservableList<BookItemViewModel> getBooks() {
         return books;
     }
 
@@ -61,7 +61,7 @@ public class BookListViewModel extends ViewModelBase {
                 .doOnCompleted(() -> layout.setRefreshing(false))
                 .subscribe(x -> {
                     books.clear();
-                    books.addAll(Mapper.mapList(x, BookViewModel::new));
+                    books.addAll(Mapper.mapList(x, BookItemViewModel::new));
                     currentIndex = 0;
                 });
     }
@@ -76,7 +76,7 @@ public class BookListViewModel extends ViewModelBase {
                 .subscribe(x -> {
                     ObservableList<Book> books = ObservableListUtils.fromList(x);
                     if (books.size() > 0) {
-                        this.books.addAll(Mapper.mapList(x, BookViewModel::new));
+                        this.books.addAll(Mapper.mapList(x, BookItemViewModel::new));
                         currentIndex++;
                     }
                 });
