@@ -14,9 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/activatedBackgroundIndicator"
-        android:orientation="horizontal"
-        android:divider="@drawable/divider"
-        android:showDividers="middle">
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="60dp"
