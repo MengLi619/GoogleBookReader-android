@@ -1,4 +1,4 @@
-package com.xiaoheifamily.bookstore.view;
+package com.xiaoheifamily.bookstore.view.fragment;
 
 import android.app.Fragment;
 
