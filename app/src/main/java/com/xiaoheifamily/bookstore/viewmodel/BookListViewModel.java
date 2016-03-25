@@ -10,9 +10,7 @@ import com.xiaoheifamily.bookstore.BR;
 import com.xiaoheifamily.bookstore.R;
 import com.xiaoheifamily.bookstore.binding.recyclerview.ItemBinder;
 import com.xiaoheifamily.bookstore.functional.Action;
-import com.xiaoheifamily.bookstore.model.Book;
 import com.xiaoheifamily.bookstore.utils.Mapper;
-import com.xiaoheifamily.bookstore.utils.ObservableListUtils;
 import com.xiaoheifamily.bookstore.webapi.BookWebApi;
 
 import javax.inject.Inject;
@@ -25,22 +23,14 @@ public class BookListViewModel extends ViewModelBase {
     private static final int PageSize = 10;
 
     private final BookWebApi bookWebApi;
-    private ObservableList<BookItemViewModel> books = new ObservableArrayList<>();
+    private final ObservableList<BookItemViewModel> books = new ObservableArrayList<>();
     private final ItemBinder itemBinder = new ItemBinder(R.layout.book_item, BR.book);
 
     private int currentIndex;
 
     @Inject
     public BookListViewModel(BookWebApi bookWebApi) {
-
         this.bookWebApi = bookWebApi;
-
-        bookWebApi.getBooks(0, PageSize)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(x -> {
-                    books.addAll(Mapper.mapList(x, BookItemViewModel::new));
-                });
     }
 
     @Bindable
@@ -59,9 +49,9 @@ public class BookListViewModel extends ViewModelBase {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnCompleted(() -> layout.setRefreshing(false))
-                .subscribe(x -> {
+                .subscribe(newBooks -> {
                     books.clear();
-                    books.addAll(Mapper.mapList(x, BookItemViewModel::new));
+                    books.addAll(Mapper.mapList(newBooks, BookItemViewModel::new));
                     currentIndex = 0;
                 });
     }
@@ -73,10 +63,9 @@ public class BookListViewModel extends ViewModelBase {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnCompleted(loadFinished::call)
-                .subscribe(x -> {
-                    ObservableList<Book> books = ObservableListUtils.fromList(x);
-                    if (books.size() > 0) {
-                        this.books.addAll(Mapper.mapList(x, BookItemViewModel::new));
+                .subscribe(newBooks -> {
+                    if (newBooks.size() > 0) {
+                        books.addAll(Mapper.mapList(newBooks, BookItemViewModel::new));
                         currentIndex++;
                     }
                 });

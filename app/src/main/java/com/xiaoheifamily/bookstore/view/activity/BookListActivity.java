@@ -2,6 +2,7 @@ package com.xiaoheifamily.bookstore.view.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -19,7 +20,7 @@ public class BookListActivity extends ActivityBase<BookListViewModel> {
         super.onCreate(savedInstanceState);
 
         BookListActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.book_list_activity);
-        binding.setModel(getViewModelComponent().getBookViewModel());
+        binding.setModel(getViewModelComponent().getBookListViewModel());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -27,6 +28,9 @@ public class BookListActivity extends ActivityBase<BookListViewModel> {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.book_list);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
         recyclerView.addItemDecoration(itemDecoration);
+
+        SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_layout);
+        refreshLayout.post(() -> refreshLayout.setRefreshing(true));
     }
 
     @Override

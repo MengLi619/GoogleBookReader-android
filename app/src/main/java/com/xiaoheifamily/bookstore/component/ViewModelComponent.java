@@ -13,5 +13,5 @@ import dagger.Component;
 @Singleton
 public interface ViewModelComponent {
 
-    BookListViewModel getBookViewModel();
+    BookListViewModel getBookListViewModel();
 }
