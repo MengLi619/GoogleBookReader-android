@@ -2,12 +2,14 @@ package com.xiaoheifamily.bookstore.view.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.xiaoheifamily.bookstore.R;
 import com.xiaoheifamily.bookstore.databinding.MainActivityBinding;
+import com.xiaoheifamily.bookstore.view.recyclerview.DividerItemDecoration;
 import com.xiaoheifamily.bookstore.viewmodel.MainViewModel;
 
 public class MainActivity extends ActivityBase<MainViewModel> {
@@ -21,6 +23,10 @@ public class MainActivity extends ActivityBase<MainViewModel> {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.book_list);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST);
+        recyclerView.addItemDecoration(itemDecoration);
     }
 
     @Override
