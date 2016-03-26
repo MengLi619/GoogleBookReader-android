@@ -19,7 +19,13 @@ public class BookDetailActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
 
+            Bundle arguments = new Bundle();
+            arguments.putSerializable(BookDetailFragment.ARG_BOOK,
+                    getIntent().getSerializableExtra(BookDetailFragment.ARG_BOOK));
+
             BookDetailFragment fragment = new BookDetailFragment();
+            fragment.setArguments(arguments);
+
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.book_detail_container, fragment)
                     .commit();

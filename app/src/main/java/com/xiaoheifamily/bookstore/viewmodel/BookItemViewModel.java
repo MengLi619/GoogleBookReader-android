@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.xiaoheifamily.bookstore.model.Book;
 import com.xiaoheifamily.bookstore.view.BookDetailActivity;
+import com.xiaoheifamily.bookstore.view.BookDetailFragment;
 
 public class BookItemViewModel extends ViewModelBase {
 
@@ -21,6 +22,8 @@ public class BookItemViewModel extends ViewModelBase {
     public void click(View view) {
 
         Intent intent = new Intent(view.getContext(), BookDetailActivity.class);
+        intent.putExtra(BookDetailFragment.ARG_BOOK, book);
+
         view.getContext().startActivity(intent);
     }
 }

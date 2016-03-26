@@ -24,7 +24,7 @@ public class BookListViewModel extends ViewModelBase {
 
     private final BookWebApi bookWebApi;
     private final ObservableList<BookItemViewModel> books = new ObservableArrayList<>();
-    private final ItemBinder itemBinder = new ItemBinder(R.layout.book_item, BR.book);
+    private final ItemBinder itemBinder = new ItemBinder(R.layout.book_item, BR.model);
 
     private int currentIndex;
 

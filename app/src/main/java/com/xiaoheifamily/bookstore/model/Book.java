@@ -5,7 +5,10 @@ import android.databinding.Bindable;
 
 import com.xiaoheifamily.bookstore.BR;
 
-public class Book extends BaseObservable {
+import java.io.Serializable;
+
+@SuppressWarnings("unused")
+public class Book extends BaseObservable implements Serializable {
 
     private int id;
     private String title;

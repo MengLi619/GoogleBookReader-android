@@ -10,8 +10,8 @@ import android.view.MenuItem;
 
 import com.xiaoheifamily.bookstore.R;
 import com.xiaoheifamily.bookstore.databinding.BookListActivityBinding;
-import com.xiaoheifamily.bookstore.widget.recyclerview.DividerItemDecoration;
 import com.xiaoheifamily.bookstore.viewmodel.BookListViewModel;
+import com.xiaoheifamily.bookstore.widget.recyclerview.DividerItemDecoration;
 
 public class BookListActivity extends ActivityBase<BookListViewModel> {
 
@@ -30,7 +30,8 @@ public class BookListActivity extends ActivityBase<BookListViewModel> {
         recyclerView.addItemDecoration(itemDecoration);
 
         SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_layout);
-        refreshLayout.post(() -> refreshLayout.setRefreshing(true));
+        refreshLayout.setRefreshing(true);
+        binding.getModel().refresh(refreshLayout);
     }
 
     @Override
