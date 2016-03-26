@@ -31,8 +31,10 @@ public class BookListActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(itemDecoration);
 
         SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_layout);
-        refreshLayout.setRefreshing(true);
-        binding.getModel().refresh(refreshLayout);
+        refreshLayout.post(() -> {
+            refreshLayout.setRefreshing(true);
+            binding.getModel().refresh(refreshLayout);
+        });
     }
 
     @Override
