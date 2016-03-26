@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.xiaoheifamily.bookstore.BR;
 import com.xiaoheifamily.bookstore.R;
-import com.xiaoheifamily.bookstore.widget.recyclerview.ItemBinder;
+import com.xiaoheifamily.bookstore.binding.ItemBinder;
 import com.xiaoheifamily.bookstore.functional.Action;
 import com.xiaoheifamily.bookstore.utils.Mapper;
 import com.xiaoheifamily.bookstore.webapi.BookWebApi;

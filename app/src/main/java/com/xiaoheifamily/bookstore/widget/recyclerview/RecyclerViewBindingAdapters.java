@@ -5,6 +5,7 @@ import android.databinding.ObservableList;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.xiaoheifamily.bookstore.binding.ItemBinder;
 import com.xiaoheifamily.bookstore.functional.Action;
 
 @SuppressWarnings("unused")
