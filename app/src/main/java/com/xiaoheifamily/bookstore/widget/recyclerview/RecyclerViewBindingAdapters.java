@@ -1,11 +1,10 @@
-package com.xiaoheifamily.bookstore.binding.recyclerview;
+package com.xiaoheifamily.bookstore.widget.recyclerview;
 
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableList;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.xiaoheifamily.bookstore.adapter.ObservableRecyclerViewAdapter;
 import com.xiaoheifamily.bookstore.functional.Action;
 
 @SuppressWarnings("unused")

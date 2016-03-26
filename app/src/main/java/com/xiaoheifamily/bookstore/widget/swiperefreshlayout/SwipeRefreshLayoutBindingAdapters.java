@@ -1,4 +1,4 @@
-package com.xiaoheifamily.bookstore.binding.swiperefreshlayout;
+package com.xiaoheifamily.bookstore.widget.swiperefreshlayout;
 
 import android.databinding.BindingAdapter;
 import android.support.v4.widget.SwipeRefreshLayout;

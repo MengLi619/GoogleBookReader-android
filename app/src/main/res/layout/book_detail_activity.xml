@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.xiaoheifamily.bookstore.view.activity.BookDetailActivity">
+    tools:context=".view.BookDetailActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"

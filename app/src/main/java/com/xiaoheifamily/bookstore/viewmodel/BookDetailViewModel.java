@@ -9,4 +9,8 @@ public class BookDetailViewModel extends ViewModelBase {
     public BookDetailViewModel(Book book) {
         this.book = book;
     }
+
+    public Book getBook() {
+        return book;
+    }
 }

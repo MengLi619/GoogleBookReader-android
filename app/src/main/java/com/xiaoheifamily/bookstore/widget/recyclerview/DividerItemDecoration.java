@@ -1,4 +1,4 @@
-package com.xiaoheifamily.bookstore.view.recyclerview;
+package com.xiaoheifamily.bookstore.widget.recyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;

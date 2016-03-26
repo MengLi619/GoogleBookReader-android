@@ -1,4 +1,4 @@
-package com.xiaoheifamily.bookstore.view.activity;
+package com.xiaoheifamily.bookstore.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import com.xiaoheifamily.bookstore.R;
 import com.xiaoheifamily.bookstore.databinding.BookListActivityBinding;
-import com.xiaoheifamily.bookstore.view.recyclerview.DividerItemDecoration;
+import com.xiaoheifamily.bookstore.widget.recyclerview.DividerItemDecoration;
 import com.xiaoheifamily.bookstore.viewmodel.BookListViewModel;
 
 public class BookListActivity extends ActivityBase<BookListViewModel> {

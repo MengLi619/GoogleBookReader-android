@@ -1,4 +1,4 @@
-package com.xiaoheifamily.bookstore.binding.imageview;
+package com.xiaoheifamily.bookstore.widget.imageview;
 
 import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;

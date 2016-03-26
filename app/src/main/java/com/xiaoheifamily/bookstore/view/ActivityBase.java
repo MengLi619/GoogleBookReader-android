@@ -1,4 +1,4 @@
-package com.xiaoheifamily.bookstore.view.activity;
+package com.xiaoheifamily.bookstore.view;
 
 import android.support.v7.app.AppCompatActivity;
 

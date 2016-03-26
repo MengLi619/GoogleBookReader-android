@@ -1,4 +1,4 @@
-package com.xiaoheifamily.bookstore.binding.recyclerview;
+package com.xiaoheifamily.bookstore.widget.recyclerview;
 
 import android.support.annotation.IntDef;
 import android.support.v7.widget.GridLayoutManager;
