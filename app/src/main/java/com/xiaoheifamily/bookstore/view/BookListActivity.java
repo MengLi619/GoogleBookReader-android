@@ -3,24 +3,25 @@ package com.xiaoheifamily.bookstore.view;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.xiaoheifamily.bookstore.App;
 import com.xiaoheifamily.bookstore.R;
 import com.xiaoheifamily.bookstore.databinding.BookListActivityBinding;
-import com.xiaoheifamily.bookstore.viewmodel.BookListViewModel;
 import com.xiaoheifamily.bookstore.widget.recyclerview.DividerItemDecoration;
 
-public class BookListActivity extends ActivityBase<BookListViewModel> {
+public class BookListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         BookListActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.book_list_activity);
-        binding.setModel(getViewModelComponent().getBookListViewModel());
+        binding.setModel(((App) getApplication()).getViewModelComponent().getBookListViewModel());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
