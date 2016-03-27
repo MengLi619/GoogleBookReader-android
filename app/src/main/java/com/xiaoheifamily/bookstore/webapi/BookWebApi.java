@@ -11,5 +11,7 @@ import rx.Observable;
 public interface BookWebApi {
 
     @GET("books")
-    Observable<List<Book>> getBooks(@Query("page") int page, @Query("size") int size);
+    Observable<List<Book>> getBooks(@Query("query") String query,
+                                    @Query("page") int page,
+                                    @Query("size") int size);
 }

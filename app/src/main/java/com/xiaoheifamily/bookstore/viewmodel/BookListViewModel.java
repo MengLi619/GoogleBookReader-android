@@ -3,13 +3,13 @@ package com.xiaoheifamily.bookstore.viewmodel;
 import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 
+import com.google.repacked.apache.commons.lang3.StringUtils;
 import com.xiaoheifamily.bookstore.BR;
 import com.xiaoheifamily.bookstore.R;
 import com.xiaoheifamily.bookstore.binding.ItemBinder;
 import com.xiaoheifamily.bookstore.functional.Action;
+import com.xiaoheifamily.bookstore.functional.Action1;
 import com.xiaoheifamily.bookstore.utils.Mapper;
 import com.xiaoheifamily.bookstore.webapi.BookWebApi;
 
@@ -20,13 +20,19 @@ import rx.schedulers.Schedulers;
 
 public class BookListViewModel extends ViewModelBase {
 
+    private static final int StartPageIndex = 0;
     private static final int PageSize = 10;
+    private static final String DefaultQuery = "android";
 
     private final BookWebApi bookWebApi;
     private final ObservableList<BookItemViewModel> books = new ObservableArrayList<>();
     private final ItemBinder itemBinder = new ItemBinder(R.layout.book_item, BR.model);
 
-    private int currentIndex;
+    private String currentQuery = DefaultQuery;
+    private int currentIndex = StartPageIndex;
+    private Action onRefreshFinished;
+    private Action onLoadMoreFinished;
+    private Action1<Throwable> onError;
 
     @Inject
     public BookListViewModel(BookWebApi bookWebApi) {
@@ -43,31 +49,58 @@ public class BookListViewModel extends ViewModelBase {
         return itemBinder;
     }
 
-    public void refresh(SwipeRefreshLayout layout) {
+    public void setOnRefreshFinished(Action onRefreshFinished) {
+        this.onRefreshFinished = onRefreshFinished;
+    }
 
-        bookWebApi.getBooks(0, PageSize)
+    public void setOnLoadMoreFinished(Action onLoadMoreFinished) {
+        this.onLoadMoreFinished = onLoadMoreFinished;
+    }
+
+    public void setOnError(Action1<Throwable> onError) {
+        this.onError = onError;
+    }
+
+    public void search(String query) {
+
+        if (StringUtils.isEmpty(query)) {
+            query = DefaultQuery;
+        }
+
+        currentQuery = query;
+        refresh();
+    }
+
+    public void refresh() {
+
+        bookWebApi.getBooks(currentQuery, StartPageIndex, PageSize)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnCompleted(() -> layout.setRefreshing(false))
+                .doOnCompleted(onRefreshFinished::call)
                 .subscribe(newBooks -> {
                     books.clear();
                     books.addAll(Mapper.mapList(newBooks, BookItemViewModel::new));
-                    currentIndex = 0;
-                });
+                    currentIndex = StartPageIndex;
+                }, this::handleError);
     }
 
-    @SuppressWarnings("UnusedParameters")
-    public void loadMore(RecyclerView view, Action loadFinished) {
+    public void loadMore() {
 
-        bookWebApi.getBooks(currentIndex, PageSize)
+        bookWebApi.getBooks(currentQuery, currentIndex, PageSize)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnCompleted(loadFinished::call)
+                .doOnCompleted(onLoadMoreFinished::call)
                 .subscribe(newBooks -> {
                     if (newBooks.size() > 0) {
                         books.addAll(Mapper.mapList(newBooks, BookItemViewModel::new));
                         currentIndex++;
                     }
-                });
+                }, this::handleError);
+    }
+
+    private void handleError(Throwable throwable) {
+        if (onError != null) {
+            onError.call(throwable);
+        }
     }
 }

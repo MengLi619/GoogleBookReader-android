@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         app:onRefresh="@{model.refresh}">
 
-        <android.support.v7.widget.RecyclerView
+        <com.xiaoheifamily.bookstore.widget.recyclerview.EndlessRecyclerView
             android:id="@+id/book_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
