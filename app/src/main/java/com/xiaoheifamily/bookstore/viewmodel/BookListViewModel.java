@@ -3,8 +3,8 @@ package com.xiaoheifamily.bookstore.viewmodel;
 import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
+import android.text.TextUtils;
 
-import com.google.repacked.apache.commons.lang3.StringUtils;
 import com.xiaoheifamily.bookstore.BR;
 import com.xiaoheifamily.bookstore.R;
 import com.xiaoheifamily.bookstore.binding.ItemBinder;
@@ -30,6 +30,7 @@ public class BookListViewModel extends ViewModelBase {
 
     private String currentQuery = DefaultQuery;
     private int currentIndex = StartPageIndex;
+    private Action onRefreshing;
     private Action onRefreshFinished;
     private Action onLoadMoreFinished;
     private Action1<Throwable> onError;
@@ -49,6 +50,10 @@ public class BookListViewModel extends ViewModelBase {
         return itemBinder;
     }
 
+    public void setOnRefreshing(Action onRefreshing) {
+        this.onRefreshing = onRefreshing;
+    }
+
     public void setOnRefreshFinished(Action onRefreshFinished) {
         this.onRefreshFinished = onRefreshFinished;
     }
@@ -63,7 +68,7 @@ public class BookListViewModel extends ViewModelBase {
 
     public void search(String query) {
 
-        if (StringUtils.isEmpty(query)) {
+        if (TextUtils.isEmpty(query)) {
             query = DefaultQuery;
         }
 
@@ -72,6 +77,8 @@ public class BookListViewModel extends ViewModelBase {
     }
 
     public void refresh() {
+
+        onRefreshing.call();
 
         bookWebApi.getBooks(currentQuery, StartPageIndex, PageSize)
                 .subscribeOn(Schedulers.newThread())

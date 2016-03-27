@@ -2,7 +2,6 @@ package com.xiaoheifamily.bookstore.view;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -17,6 +16,7 @@ import android.widget.SearchView;
 import com.xiaoheifamily.bookstore.App;
 import com.xiaoheifamily.bookstore.R;
 import com.xiaoheifamily.bookstore.databinding.BookListActivityBinding;
+import com.xiaoheifamily.bookstore.viewmodel.BookListViewModel;
 import com.xiaoheifamily.bookstore.widget.recyclerview.DividerItemDecoration;
 import com.xiaoheifamily.bookstore.widget.recyclerview.EndlessRecyclerView;
 
@@ -24,12 +24,18 @@ import java.net.ConnectException;
 
 public class BookListActivity extends AppCompatActivity {
 
+    private BookListViewModel model;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // create view model
+        model = ((App) getApplication()).getViewModelComponent().getBookListViewModel();
+
+        // bind view model
         BookListActivityBinding binding = DataBindingUtil.setContentView(this, R.layout.book_list_activity);
-        binding.setModel(((App) getApplication()).getViewModelComponent().getBookListViewModel());
+        binding.setModel(model);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,36 +47,26 @@ public class BookListActivity extends AppCompatActivity {
 
         // init swipe refresh layout
         SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_layout);
-        refreshLayout.post(() -> {
-            refreshLayout.setRefreshing(true);
-            binding.getModel().refresh();
-        });
-
-        // handle search operation
-        if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
-            String query = getIntent().getStringExtra(SearchManager.QUERY);
-            refreshLayout.post(() -> {
-                refreshLayout.setRefreshing(true);
-                binding.getModel().search(query);
-            });
-        }
 
         // bind view model events
-        binding.getModel().setOnError(ex -> {
+        model.setOnError(ex -> {
             if (ex instanceof ConnectException) {
                 CoordinatorLayout layout = (CoordinatorLayout) findViewById(R.id.main_layout);
                 Snackbar.make(layout, "Network Error", Snackbar.LENGTH_SHORT).show();
             }
         });
 
-        binding.getModel().setOnRefreshFinished(() -> {
-            refreshLayout.setRefreshing(false);
-        });
+        model.setOnRefreshing(() ->
+                refreshLayout.setRefreshing(true));
 
-        binding.getModel().setOnLoadMoreFinished(() -> {
-            ((EndlessRecyclerView) recyclerView).setLoading(false);
-        });
+        model.setOnRefreshFinished(() ->
+                refreshLayout.setRefreshing(false));
 
+        model.setOnLoadMoreFinished(() ->
+                ((EndlessRecyclerView) recyclerView).setLoading(false));
+
+        // start refresh
+        model.refresh();
     }
 
     @Override
@@ -83,6 +79,20 @@ public class BookListActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false);
+        searchView.setSubmitButtonEnabled(true);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                model.search(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return true;
+            }
+        });
 
         return true;
     }

@@ -10,17 +10,17 @@ import java.io.Serializable;
 @SuppressWarnings("unused")
 public class Book extends BaseObservable implements Serializable {
 
-    private int id;
+    private String id;
     private String title;
     private String description;
     private String image;
 
     @Bindable
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
         notifyPropertyChanged(BR.id);
     }
