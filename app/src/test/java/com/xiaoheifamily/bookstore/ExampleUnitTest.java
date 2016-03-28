@@ -1,4 +1,4 @@
-package com.xiaoheifamily.bookstore;
+package com.xiaoheifamily.googlebookreader;
 
 import org.junit.Test;
 

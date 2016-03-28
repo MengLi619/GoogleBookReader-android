@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="model"
-            type="com.xiaoheifamily.bookstore.viewmodel.BookDetailViewModel" />
+            type="com.xiaoheifamily.googlebookreader.viewmodel.BookDetailViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{model.book.title}" />
+            android:text="@{model.book.title}"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Book Title"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@{model.book.description}"
+            android:textSize="14sp"
+            tools:text="Book Description"/>
 
     </LinearLayout>
 

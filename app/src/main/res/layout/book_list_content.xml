@@ -10,9 +10,9 @@
 
         <variable
             name="model"
-            type="com.xiaoheifamily.bookstore.viewmodel.BookListViewModel" />
+            type="com.xiaoheifamily.googlebookreader.viewmodel.BookListViewModel" />
 
-        <import type="com.xiaoheifamily.bookstore.widget.recyclerview.LayoutManagers" />
+        <import type="com.xiaoheifamily.googlebookreader.widget.recyclerview.LayoutManagers" />
     </data>
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         app:onRefresh="@{model.refresh}">
 
-        <com.xiaoheifamily.bookstore.widget.recyclerview.EndlessRecyclerView
+        <com.xiaoheifamily.googlebookreader.widget.recyclerview.EndlessRecyclerView
             android:id="@+id/book_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

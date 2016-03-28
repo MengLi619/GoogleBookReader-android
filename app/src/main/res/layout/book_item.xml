@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.xiaoheifamily.bookstore.viewmodel.BookItemViewModel" />
+            type="com.xiaoheifamily.googlebookreader.viewmodel.BookItemViewModel" />
     </data>
 
     <LinearLayout
