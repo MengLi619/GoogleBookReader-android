@@ -1,6 +1,6 @@
 package com.xiaoheifamily.googlebookreader.view;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 
 public class AccountFragment extends Fragment {
 }
