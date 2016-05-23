@@ -18,12 +18,10 @@ import android.widget.SearchView;
 
 import com.xiaoheifamily.googlebookreader.App;
 import com.xiaoheifamily.googlebookreader.R;
-import com.xiaoheifamily.googlebookreader.databinding.BookListActivityBinding;
+import com.xiaoheifamily.googlebookreader.databinding.BookListFragmentBinding;
 import com.xiaoheifamily.googlebookreader.viewmodel.BookListViewModel;
 import com.xiaoheifamily.googlebookreader.widget.recyclerview.DividerItemDecoration;
 import com.xiaoheifamily.googlebookreader.widget.recyclerview.EndlessRecyclerView;
-
-import java.net.ConnectException;
 
 public class BookListFragment extends Fragment {
 
@@ -34,7 +32,7 @@ public class BookListFragment extends Fragment {
 
         model = ((App) getActivity().getApplication()).getViewModelComponent().getBookListViewModel();
 
-        BookListActivityBinding binding = DataBindingUtil.inflate(inflater, R.layout.book_list_fragment, container, false);
+        BookListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.book_list_fragment, container, false);
         binding.setModel(model);
 
         // setup recycler view
@@ -47,10 +45,8 @@ public class BookListFragment extends Fragment {
 
         // bind view model events
         model.setOnError(ex -> {
-            if (ex instanceof ConnectException) {
-                CoordinatorLayout layout = (CoordinatorLayout) getActivity().findViewById(R.id.main_layout);
-                Snackbar.make(layout, "Network Error", Snackbar.LENGTH_SHORT).show();
-            }
+            CoordinatorLayout layout = (CoordinatorLayout) getActivity().findViewById(R.id.main_layout);
+            Snackbar.make(layout, ex.getMessage(), Snackbar.LENGTH_SHORT).show();
         });
 
         model.setOnRefreshing(() ->
@@ -71,9 +67,6 @@ public class BookListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-
-        // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.main_menu, menu);
 
         // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
