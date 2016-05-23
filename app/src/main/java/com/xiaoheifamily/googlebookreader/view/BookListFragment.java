@@ -2,7 +2,6 @@ package com.xiaoheifamily.googlebookreader.view;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -32,20 +31,22 @@ public class BookListFragment extends Fragment {
 
         model = ((App) getActivity().getApplication()).getViewModelComponent().getBookListViewModel();
 
-        BookListFragmentBinding binding = DataBindingUtil.inflate(inflater, R.layout.book_list_fragment, container, false);
+        View view = inflater.inflate(R.layout.book_list_fragment, container, false);
+        BookListFragmentBinding binding = BookListFragmentBinding.bind(view);
         binding.setModel(model);
 
         // setup recycler view
-        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.book_list);
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.book_list);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(view.getContext(),
+                DividerItemDecoration.VERTICAL_LIST);
         recyclerView.addItemDecoration(itemDecoration);
 
         // setup swipe refresh layout
-        SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) getActivity().findViewById(R.id.refresh_layout);
+        SwipeRefreshLayout refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
 
         // bind view model events
         model.setOnError(ex -> {
-            CoordinatorLayout layout = (CoordinatorLayout) getActivity().findViewById(R.id.main_layout);
+            CoordinatorLayout layout = (CoordinatorLayout) view.findViewById(R.id.main_layout);
             Snackbar.make(layout, ex.getMessage(), Snackbar.LENGTH_SHORT).show();
         });
 
@@ -61,7 +62,7 @@ public class BookListFragment extends Fragment {
         // start refresh
         model.refresh();
 
-        return binding.getRoot();
+        return view;
     }
 
     @Override
