@@ -3,6 +3,8 @@
     package="com.xiaoheifamily.googlebookreader">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
     <application
         android:name="com.xiaoheifamily.googlebookreader.App"
@@ -27,6 +29,10 @@
             android:name="com.xiaoheifamily.googlebookreader.view.BookDetailActivity"
             android:label="@string/title_activity_book_detail"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
